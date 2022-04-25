@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@grammyjs/i18n": "^0.5.1",
+    "@grammyjs/menu": "^1.0.4",
+    "@grammyjs/router": "^1.1.1",
+    "@grammyjs/runner": "^1.0.3",
+    "@grammyjs/transformer-throttler": "^1.1.1",
+    "axios": "^0.26.1",
+    "dotenv": "^16.0.0",
+    "grammy": "^1.7.0",
+    "pg": "^8.7.3",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.6.0",
+    "typeorm": "^0.2.44"
+  },
+  "name": "type",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "pm2": "NODE_ENV=production pm2 start src/index.ts --watch",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch './**/*.ts' --exec 'ts-node' src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

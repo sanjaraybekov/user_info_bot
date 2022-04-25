@@ -1,0 +1,14 @@
+{
+  "main_text": "Namoz vaqti botga hush kelibsiz. Ushbu bot yordamida O'zbekiston bo'ylab hohlagan hududdagi namoz vaqtlarini bilib olishingiz mumkin.\n\nBarcha ma'lumotlar ishonchli manbalarga tayangan holda taqdim etiladi.",
+  "location": "📍 LokatsiyaRu",
+  "district": "Tuman",
+  "choose_district": "Tummani tanlang",
+  "region": "Viloyat",
+  "profile": " 🙎🏻‍♂️ Profil",
+  "main_menu": "🏠 Asosiy",
+  "introduction": "<b>Xush kelibsiz! Iltimos, tilni tanlang.</b>\n<b>Welcome! Please, select the language.</b>\n<b>Добро пожаловать! Пожалуйста, выберите язык. </b>\n",
+  "language": "🌐 Til",
+  "choosed": "⭐️ Tanlanganlar",
+  "go_back": "👈 Orqaga",
+  "skip_btn": "O'tkazib yuborish 👉"
+}
