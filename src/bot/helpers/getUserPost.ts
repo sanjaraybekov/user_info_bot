@@ -3,7 +3,7 @@ import { t } from "../i18";
 import { MyContext } from "../types/MyContext";
 import { UserType } from "../types/User";
 
-export const getStdPost = (ctx: MyContext, data: UserType, type?: string) => {
+export const getUserPost = (ctx: MyContext, data: UserType, type?: string) => {
   if (type) {
     return ctx.reply(
       `${t(ctx, texts.user_address) + data.address}\n${

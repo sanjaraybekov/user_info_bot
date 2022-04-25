@@ -3,7 +3,7 @@ import { MyContext } from "../types/MyContext";
 import { texts } from "../constants/texts";
 import { t } from "../i18";
 import { Keyboard, NextFunction } from "grammy";
-import { getStdPost } from "../helpers/getStdPost";
+import { getUserPost } from "../helpers/getUserPost";
 
 const userInfo = new Router<MyContext>((ctx) => ctx.session.route);
 
@@ -140,7 +140,7 @@ userInfo.route(texts.user_infos.add_description, (ctx) => {
   if (ctx.msg?.text !== t(ctx, texts.skip_btn)) {
     ctx.session.user.description = ctx.msg?.text || "";
   }
-  return getStdPost(ctx, ctx.session.user, "adding");
+  return getUserPost(ctx, ctx.session.user, "adding");
 });
 
 export { userInfo };
