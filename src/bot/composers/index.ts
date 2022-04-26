@@ -8,8 +8,11 @@ const composer = new Composer<MyContext>();
 
 composer.callbackQuery(texts.starting, (ctx) => {
   ctx.session.route = texts.user_infos.user_name_surname;
-  return ctx.reply(texts.user_infos.user_name_surname);
+  return ctx.reply(t(ctx, texts.user_infos.user_name_surname));
 });
+// composer.callbackQuery(texts.location, async (ctx) => {
+//   ctx.session.route = "get_location";
+// });
 composer.callbackQuery(texts.main_menu, (ctx) => {
   ctx.session.route = "";
   ctx.deleteMessage();

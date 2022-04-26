@@ -34,7 +34,9 @@ export const texts = {
   price: "price",
   list_of_stadiums: "list_of_stadiums",
   show_images: "show_images",
+
   user_infos: {
+    add_birthday: "add_birthday",
     user_name_surname: "user_name_surname",
     birthday: "birthday",
     add_address: "add_address",
@@ -56,4 +58,7 @@ export const texts = {
     add_price: "add_price",
     add_price_err: "add_price_err",
   },
+  namesername: "namesername",
+  birthday: "birthday",
+  useraddress: "useraddress",
 };

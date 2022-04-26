@@ -13,7 +13,7 @@ userInfo.route(texts.user_infos.user_name_surname, async (ctx) => {
 
   ctx.session.route = texts.user_infos.birthday;
   return ctx
-    .reply(texts.user_infos.birthday)
+    .reply(t(ctx, texts.user_infos.add_birthday))
     .then((v: any) => (ctx.session.msg_id_to_delete = v.message_id));
 });
 
@@ -22,7 +22,9 @@ userInfo.route(texts.user_infos.birthday, async (ctx) => {
   console.log(ctx.session.user.birthday);
   ctx.session.route = texts.user_infos.add_address;
   return ctx
-    .reply(texts.user_infos.add_address)
+    .reply(t(ctx, texts.user_infos.add_address), {
+      parse_mode: "HTML",
+    })
     .then((v: any) => (ctx.session.msg_id_to_delete = v.message_id));
 });
 

@@ -21,11 +21,14 @@
   "skip_btn": "O'tkazib yuborish 👉",
   "join": "➕ Obuna bo'lish",
   "joined": "😊 Obuna bo'ldim",
-
+  "birthday": "Tug'ulgan sana: ",
+  "useraddress": "Yashash manzili: ",
   "stadium_search": "🔍 Stadion qidirish",
-
+  "namesurname": "Ism va Familiya: ",
   "orientr": "Mo'ljal: ",
   "telephone": "Telefon: ",
+  "add_birthday": "Tug'ulgan kuningizni kiriting",
+  "user_name_surname": "Ism va familiyangizni kiriting",
   "price": "Narx: ",
   "extra_info": "Ma'lumot: ",
   "show_images": "Rasmlarni ko'rish: ",

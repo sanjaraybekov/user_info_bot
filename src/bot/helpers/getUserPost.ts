@@ -8,9 +8,11 @@ export const getUserPost = (ctx: MyContext, data: UserType, type?: string) => {
 
   if (type) {
     return ctx.reply(
-      `${t(ctx, texts.name_surname) + data.username_surname}\n${
-        t(ctx, texts.user_infos.birthday) + data.birthday
-      }${t(ctx, texts.user_address) + data.address}\n${
+      `Obunachi haqida ma'lumot\n\n${
+        t(ctx, texts.namesername) + data.username_surname
+      }\n${t(ctx, texts.birthday) + data.birthday}\n${
+        t(ctx, texts.useraddress) + data.address
+      }\n${
         t(ctx, texts.telephone) +
         data.phones.map((phone) => {
           return " " + phone;
@@ -19,25 +21,25 @@ export const getUserPost = (ctx: MyContext, data: UserType, type?: string) => {
       {
         reply_markup: {
           inline_keyboard: [
-            [
-              {
-                text: t(ctx, texts.location),
-                callback_data: `location_lat=${Number(
-                  data.latitude
-                )}_lon=${Number(data.longitude)}`,
-              },
-              {
-                text: t(ctx, texts.share),
-                switch_inline_query: `${
-                  t(ctx, texts.orientr) + data.address
-                }\n${
-                  t(ctx, texts.telephone) +
-                  data.phones.map((phone) => {
-                    return " " + phone;
-                  })
-                }`,
-              },
-            ],
+            // [
+            // {
+            //   text: t(ctx, texts.location),
+            //   callback_data: `location_lat=${Number(
+            //     data.latitude
+            //   )}_lon=${Number(data.longitude)}`,
+            // },
+            // {
+            //   text: t(ctx, texts.share),
+            //   switch_inline_query: `${
+            //     t(ctx, texts.orientr) + data.address
+            //   }\n${
+            //     t(ctx, texts.telephone) +
+            //     data.phones.map((phone) => {
+            //       return " " + phone;
+            //     })
+            //   }`,
+            // },
+            // ],
             [
               {
                 text: t(ctx, texts.confirm),
