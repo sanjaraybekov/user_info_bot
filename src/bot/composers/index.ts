@@ -14,7 +14,6 @@ composer.callbackQuery(texts.starting, (ctx) => {
 
 composer.callbackQuery(texts.confirm, (ctx) => {
   ctx.session.route = texts.confirm;
-
   return bot.api.sendMessage(
     788109879,
     t(ctx, texts.confirmed) + `\nYana yangi ma'lumot kiritishni hohlaysizmi?`,
@@ -37,6 +36,7 @@ composer.callbackQuery(texts.confirm, (ctx) => {
   );
 });
 composer.callbackQuery(texts.cancel, (ctx) => {
+  ctx.deleteMessage();
   return bot.api.sendMessage(
     788109879,
     t(ctx, texts.not_confirmed) +
