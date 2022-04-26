@@ -7,18 +7,30 @@ import { getUserPost } from "../helpers/getUserPost";
 
 const userInfo = new Router<MyContext>((ctx) => ctx.session.route);
 
-userInfo.route(texts.user_info, async (ctx) => {
-  ctx.session.route = texts.user_infos.add_address;
+userInfo.route(texts.user_infos.user_name_surname, async (ctx) => {
+  ctx.session.user.username_surname = ctx.message?.text || "";
+  console.log(ctx.session.user.username_surname);
+
+  ctx.session.route = texts.user_infos.birthday;
   return ctx
-    .editMessageText(t(ctx, texts.user_infos.add_address), {
-      reply_markup: { inline_keyboard: [] },
-      parse_mode: "HTML",
-    })
+    .reply(texts.user_infos.birthday)
     .then((v: any) => (ctx.session.msg_id_to_delete = v.message_id));
 });
 
+userInfo.route(texts.user_infos.birthday, async (ctx) => {
+  ctx.session.user.birthday = ctx.message?.text || "";
+  console.log(ctx.session.user.birthday);
+  ctx.session.route = texts.user_infos.add_address;
+  return ctx
+    .reply(texts.user_infos.add_address)
+    .then((v: any) => (ctx.session.msg_id_to_delete = v.message_id));
+});
+
+userInfo.route(texts.user_infos.add_address, addAddress);
+
 async function addAddress(ctx: MyContext) {
   ctx.session.user.address = ctx.message?.text || "";
+  console.log(ctx.session.user.address);
 
   const sendLocation = new Keyboard()
     .requestLocation(t(ctx, texts.user_infos.add_location_req_btn))
@@ -26,8 +38,6 @@ async function addAddress(ctx: MyContext) {
     .text(t(ctx, texts.go_back));
 
   ctx.session.route = texts.user_infos.add_location;
-  ctx.deleteMessage();
-  ctx.api.deleteMessage(ctx.from?.id || "", ctx.session.msg_id_to_delete);
   return ctx
     .reply(t(ctx, texts.user_infos.add_location), {
       reply_markup: { ...sendLocation, resize_keyboard: true },
@@ -47,13 +57,12 @@ function backMiddleware(prevRoute: string, prevRouteMiddleware: Function) {
   };
 }
 
-userInfo.route(texts.user_infos.add_address, addAddress);
 userInfo.route(
   texts.user_infos.add_location,
   backMiddleware(texts.user_infos.add_address, addAddress),
   async (ctx) => {
     const location = ctx.msg?.location;
-    ctx.deleteMessage();
+    // ctx.deleteMessage();
     if (location) {
       ctx.api.deleteMessage(ctx.chat?.id || "", ctx.session.msg_id_to_delete);
       ctx.session.user.longitude =
@@ -62,7 +71,7 @@ userInfo.route(
         ctx.message?.location?.latitude.toString() || "";
 
       ctx.session.route = texts.user_infos.add_phone;
-      ctx.api.deleteMessage(ctx.from?.id || "", ctx.session.msg_id_to_delete);
+      // ctx.api.deleteMessage(ctx.from?.id || "", ctx.session.msg_id_to_delete);
       const sendPhone = new Keyboard().requestContact(
         t(ctx, texts.user_infos.add_phone_req_btn)
       );
@@ -75,8 +84,8 @@ userInfo.route(
     } else return ctx.reply(t(ctx, texts.user_infos.add_location_err));
   }
 );
-userInfo.route(texts.user_infos.add_phone, (ctx) => {
-  ctx.deleteMessage();
+userInfo.route(texts.user_infos.add_phone, async (ctx) => {
+  // ctx.deleteMessage();
   const regex = /\+?(998)? ?(\d{2} ?\d{3} ?\d{2} ?\d{2})$/gi;
   if (regex.test(ctx.msg?.text || "") || ctx.msg?.contact) {
     ctx.session.user.phones = [
@@ -97,8 +106,8 @@ userInfo.route(texts.user_infos.add_phone, (ctx) => {
     return ctx.reply(texts.user_infos.add_phone_err);
   }
 });
-userInfo.route(texts.user_infos.add_extra_phone, (ctx) => {
-  ctx.deleteMessage();
+userInfo.route(texts.user_infos.add_extra_phone, async (ctx) => {
+  // ctx.deleteMessage();
   const regex = /\+?(998)? ?(\d{2} ?\d{3} ?\d{2} ?\d{2})$/gi;
   if (regex.test(ctx.msg?.text || "") || ctx.msg?.contact) {
     ctx.session.user.phones = [
@@ -116,7 +125,7 @@ userInfo.route(texts.user_infos.add_extra_phone, (ctx) => {
     });
   } else if (ctx.message?.text === t(ctx, texts.skip_btn)) {
     ctx.session.route = texts.user_infos.add_description;
-    ctx.api.deleteMessage(ctx.from?.id || "", ctx.session.msg_id_to_delete);
+    // ctx.api.deleteMessage(ctx.from?.id || "", ctx.session.msg_id_to_delete);
     return ctx
       .reply(t(ctx, texts.user_infos.add_description), {
         reply_markup: {
@@ -132,7 +141,7 @@ userInfo.route(texts.user_infos.add_extra_phone, (ctx) => {
 });
 
 userInfo.route(texts.user_infos.add_description, (ctx) => {
-  ctx.deleteMessage();
+  // ctx.deleteMessage();
   if (!ctx.msg?.text) {
     return ctx.reply(t(ctx, texts.user_infos.add_description_err));
   }

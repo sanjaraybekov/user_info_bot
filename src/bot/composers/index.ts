@@ -5,9 +5,10 @@ import { main_menu } from "../markups/markups";
 import { MyContext } from "../types/MyContext";
 
 const composer = new Composer<MyContext>();
-composer.use((ctx, next) => {
-  ctx.session.route = texts.user_info;
-  next();
+
+composer.callbackQuery(texts.starting, (ctx) => {
+  ctx.session.route = texts.user_infos.user_name_surname;
+  return ctx.reply(texts.user_infos.user_name_surname);
 });
 composer.callbackQuery(texts.main_menu, (ctx) => {
   ctx.session.route = "";

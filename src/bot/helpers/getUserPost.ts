@@ -4,9 +4,13 @@ import { MyContext } from "../types/MyContext";
 import { UserType } from "../types/User";
 
 export const getUserPost = (ctx: MyContext, data: UserType, type?: string) => {
+  console.log(data);
+
   if (type) {
     return ctx.reply(
-      `${t(ctx, texts.user_address) + data.address}\n${
+      `${t(ctx, texts.name_surname) + data.username_surname}\n${
+        t(ctx, texts.user_infos.birthday) + data.birthday
+      }${t(ctx, texts.user_address) + data.address}\n${
         t(ctx, texts.telephone) +
         data.phones.map((phone) => {
           return " " + phone;
