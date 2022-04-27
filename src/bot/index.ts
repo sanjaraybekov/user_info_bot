@@ -6,6 +6,7 @@ import i18n, { t } from "./i18";
 import { composer } from "./composers";
 import { userInfo } from "./routes/filterUserInfo";
 import { texts } from "./constants/texts";
+
 export const loadBot = () => {
   bot.use(
     session({

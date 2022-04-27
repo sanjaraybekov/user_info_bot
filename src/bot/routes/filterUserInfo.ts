@@ -146,9 +146,9 @@ userInfo.route(texts.user_infos.add_description, (ctx) => {
     return ctx.reply(t(ctx, texts.user_infos.add_description_err));
   }
   ctx.api.deleteMessage(ctx.chat?.id || "", ctx.session.msg_id_to_delete);
+  ctx.reply("Ma'lumotlarni tasdiqlash jarayoni amalga oshirilmoqda...");
   if (ctx.msg?.text !== t(ctx, texts.skip_btn)) {
     ctx.session.user.description = ctx.msg?.text || "";
-    ctx.reply("Ma'lumotlarni tasdiqlash jarayoni amalga oshirilmoqda...");
   }
 
   return bot.api.sendMessage(
@@ -179,9 +179,18 @@ userInfo.route(texts.user_infos.add_description, (ctx) => {
           [
             {
               text: t(ctx, texts.confirm),
-              callback_data: texts.confirm,
+              callback_data: `confirm~${ctx.session.user.user_id}~${
+                ctx.session.user.username_surname
+              }~${ctx.session.user.birthday}~${
+                ctx.session.user.address
+              }~${ctx.session.user.phones.map((phone) => {
+                return " " + phone;
+              })}~${ctx.session.user.description}`,
             },
-            { text: t(ctx, texts.cancel), callback_data: texts.cancel },
+            {
+              text: t(ctx, texts.cancel),
+              callback_data: `cancle~${ctx.session.user.user_id}`,
+            },
           ],
         ],
       },

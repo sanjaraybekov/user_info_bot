@@ -1,4 +1,5 @@
 export type UserType = {
+  user_id: number;
   description: string;
   latitude: string;
   longitude: string;

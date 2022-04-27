@@ -16,5 +16,5 @@ export const getUserPost = (ctx: MyContext, data: UserType) => {
   }\n${
     t(ctx, texts.extra_info) +
     (data.description === undefined ? "Izoh qoldirilmadi" : data.description)
-  }`;
+  }\n\nID: ${data.user_id}`;
 };

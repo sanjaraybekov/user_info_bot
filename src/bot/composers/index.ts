@@ -1,4 +1,5 @@
 import { Bot, Composer } from "grammy";
+import { User } from "../../db/User";
 import { texts } from "../constants/texts";
 import bot from "../core/bot";
 import { t } from "../i18";
@@ -8,14 +9,27 @@ import { MyContext } from "../types/MyContext";
 const composer = new Composer<MyContext>();
 
 composer.callbackQuery(texts.starting, (ctx) => {
+  ctx.session.user.user_id = ctx.chat?.id || 0;
   ctx.session.route = texts.user_infos.user_name_surname;
   return ctx.reply(t(ctx, texts.user_infos.user_name_surname));
 });
 
-composer.callbackQuery(texts.confirm, (ctx) => {
-  ctx.session.route = texts.confirm;
+composer.callbackQuery(/^confirm~(\w+)/, async (ctx) => {
+  const UserInfos = ctx.callbackQuery.data.split("~").slice(1);
+
+  const newUser = await User.create({
+    user_id: Number(UserInfos[0]),
+    // username: "@username",
+    fullName: UserInfos[1],
+    birthday: UserInfos[2],
+    address: UserInfos[3],
+    phoneNumbers: UserInfos[4],
+  });
+
+  newUser.save();
+
   return bot.api.sendMessage(
-    788109879,
+    newUser.user_id,
     t(ctx, texts.confirmed) + `\nYana yangi ma'lumot kiritishni hohlaysizmi?`,
     {
       reply_markup: {
@@ -35,10 +49,12 @@ composer.callbackQuery(texts.confirm, (ctx) => {
     }
   );
 });
-composer.callbackQuery(texts.cancel, (ctx) => {
+
+composer.callbackQuery(/^cancle~(\d)/, async (ctx) => {
+  const UserId = await Number(ctx.callbackQuery.data.split("~")[1]);
   ctx.deleteMessage();
   return bot.api.sendMessage(
-    788109879,
+    UserId,
     t(ctx, texts.not_confirmed) +
       `\nIltimos barcha shartlarni bajarganligingiz haqida ishonch hosil qiling.\nQayta boshlash uchun /boshlash 👈 buyrug'uni bosing`
   );

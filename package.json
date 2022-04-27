@@ -11,7 +11,7 @@
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.6.0",
-    "typeorm": "^0.2.44"
+    "typeorm": "^0.2.45"
   },
   "name": "type",
   "version": "1.0.0",
