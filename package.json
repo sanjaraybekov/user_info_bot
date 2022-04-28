@@ -11,9 +11,11 @@
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.6.0",
-    "typeorm": "^0.2.45"
+    "typeorm": "^0.2.45",
+    "xlsx": "^0.18.5"
   },
   "name": "type",
+  "type": "commonjs",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -24,5 +26,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjaraybekov/user_info_bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sanjaraybekov/user_info_bot/issues"
+  },
+  "homepage": "https://github.com/sanjaraybekov/user_info_bot#readme",
   "description": ""
 }

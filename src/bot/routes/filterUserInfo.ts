@@ -10,7 +10,6 @@ const userInfo = new Router<MyContext>((ctx) => ctx.session.route);
 
 userInfo.route(texts.user_infos.user_name_surname, async (ctx) => {
   ctx.session.user.username_surname = ctx.message?.text || "";
-
   ctx.session.route = texts.user_infos.birthday;
   return ctx
     .reply(t(ctx, texts.user_infos.add_birthday))
