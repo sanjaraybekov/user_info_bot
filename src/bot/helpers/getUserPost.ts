@@ -8,12 +8,7 @@ export const getUserPost = (ctx: MyContext, data: UserType) => {
     t(ctx, texts.namesername) + data.username_surname
   }\n${t(ctx, texts.birthday) + data.birthday}\n${
     t(ctx, texts.useraddress) + data.address
-  }\n${
-    t(ctx, texts.telephone) +
-    data.phones.map((phone) => {
-      return " " + phone;
-    })
-  }\n${
+  }\n${t(ctx, texts.telephone) + data.phones}\n${
     t(ctx, texts.extra_info) +
     (data.description === undefined ? "Izoh qoldirilmadi" : data.description)
   }\n\nID: ${data.user_id}`;

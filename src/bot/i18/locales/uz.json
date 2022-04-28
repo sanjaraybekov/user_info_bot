@@ -44,7 +44,7 @@
   "add_stadium": "➕ Stadion qo'shish",
   "add_std_region": "<b>Viloyat</b>\nStadion qaysi viloyatda joylashgan?",
   "add_district": "<b>Tuman</b>\nStadion qaysi tumanda joylashgan?",
-  "add_address": "<b>Manzil</b>\nYashash mazilingizni yozib qoldiring👇. Ko'pchilik biladigan ma'ljal nomi bilan birgalikda yozsangiz yaxshi.\nMasalan: <b>Next Savdo Markazi yonida va h.k</b>",
+  "add_address": "<b>Manzil</b>\nYashash mazilingizni yozib qoldiring👇. Ko'pchilik biladigan ma'ljal nomi bilan birgalikda yozsangiz yaxshi.\nMasalan: <b>Mega Planet savdo markazi yonida va h.k</b>",
   "add_location_req_btn": "📍 Lokatsiya yuborish",
   "add_location": "<b>Lokatsiya</b>\nYashash manzilingiz joylashgan manzilni yuboring",
   "add_location_err": "Xatolik❗️ Iltimos lokatsiyangizni yuboring",
@@ -52,11 +52,11 @@
   "add_images_err": "Xatolik❗️ Iltimos stadion rasmlarini yuboring",
   "add_price": "<b>Narx</b>\nStadionda 1 soat o'ynash narxi qancha? Tugmadan tanlashingiz yoki o'zingiz yozib yuborishingiz mumkin",
   "add_price_err": "Xatolik❗️ Iltimos narxni matn ko'rinishida yuboring",
-  "add_phone": "<b>Telefon raqam</b>\nSiz bilan bog'lanishimiz uchun telefon raqamini yuboring. Bir nechta raqam yuborishingiz mumkin\n\n<b>Masalan:</b>\n901234567\n911234567\n\nBu bosqichdan keyin sizga to'lov uchun karta raqami taqdim qilinadi.",
+  "add_phone": "<b>Telefon raqam</b>\nSiz bilan bog'lanishimiz uchun telefon raqamini yuboring. Buni quyidagi tugmani bosish orqali yoki yozib amalga oshirishingiz mumkin.\n\n<b>Masalan:</b>\n901234567\n\nBu bosqichdan keyin sizga to'lov uchun karta raqami taqdim qilinadi.",
   "add_phone_err": "Xatolik❗️ Iltimos telefon raqamni to'g'ri shaklda yuboring",
   "add_phone_req_btn": "☎️ Telefon raqam yuborish",
   "add_extra_phone": "Qo'shimcha telefon raqam kiriting yoki o'tkazib yuboring",
   "add_extra_phone_err": "Xatolik❗️ Iltimos to'g'ri amalni bajaring",
-  "add_description": "To'lov uchun karta raqami\n\n<b>1111222233334444</b>\n\nTo'lovni amalga oshirganingizdan so'ngra izoh qoldirishingiz mumkin.\n\nMasalan: <b>To'lov qilindi</b>\n\nEslatma! Ma'lumotlaringiz qabul qilinishi uchun avval to'lovni amalga oshirishingiz kerak",
+  "add_description": "To'lov uchun karta raqami\n\n<b>💳 1111222233334444</b>\n\nTo'lovni amalga oshirganingizdan so'ngra izoh qoldirishingiz mumkin.\n\nMasalan: <b>To'lov qilindi</b>\n\nEslatma! Ma'lumotlaringiz qabul qilinishi uchun avval to'lovni amalga oshirishingiz kerak",
   "add_description_err": "Xatolik❗️ Iltimos to'g'ri malumot kiriting"
 }

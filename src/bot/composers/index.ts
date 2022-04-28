@@ -1,4 +1,4 @@
-import { Composer } from "grammy";
+import { Composer, InputFile } from "grammy";
 import { User } from "../../db/User";
 import { texts } from "../constants/texts";
 import converterFolder from "../converterFolder";
@@ -6,7 +6,7 @@ import bot from "../core/bot";
 import { t } from "../i18";
 import { main_menu } from "../markups/markups";
 import { MyContext } from "../types/MyContext";
-import * as fs from "fs";
+
 const composer = new Composer<MyContext>();
 
 composer.callbackQuery(texts.starting, (ctx) => {
@@ -17,21 +17,22 @@ composer.callbackQuery(texts.starting, (ctx) => {
 
 composer.callbackQuery(/^confirm~(\w+)/, async (ctx) => {
   const UserInfos = ctx.callbackQuery.data.split("~").slice(1);
-
   const userId = Number(ctx.callbackQuery.data.split("~").slice(1)[0]);
+
   const newUser = await User.create({
-    user_id: Number(UserInfos[0]),
-    // username: "@username",
+    user_id: Number(UserInfos[0]) || 0,
     fullName: UserInfos[1],
     birthday: UserInfos[2],
     address: UserInfos[3],
     phoneNumbers: UserInfos[4],
+    tg_username: UserInfos[5],
   });
   await newUser.save();
   await converterFolder();
-
-  // bot.api.sendDocument(-1001718670724, require("../../../users.xlsx"));
-
+  await bot.api.sendDocument(-1001718670724, new InputFile("./users.xlsx"), {
+    caption: "users.xlsx",
+  });
+  await ctx.editMessageText("✅ Foydalanuvchi ro'yxatga olindi");
   return await bot.api.sendMessage(
     userId,
     t(ctx, texts.confirmed) + `\nYana yangi ma'lumot kiritishni hohlaysizmi?`,
@@ -57,6 +58,7 @@ composer.callbackQuery(/^confirm~(\w+)/, async (ctx) => {
 composer.callbackQuery(/^cancle~(\d)/, async (ctx) => {
   const UserId = await Number(ctx.callbackQuery.data.split("~")[1]);
   ctx.deleteMessage();
+  ctx.reply("❌ Foydalanuvchi tasdiqlanmadi");
   return await bot.api.sendMessage(
     UserId,
     t(ctx, texts.not_confirmed) +

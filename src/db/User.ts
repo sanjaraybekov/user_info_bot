@@ -11,7 +11,7 @@ export class User extends BaseEntity {
   @Column({
     nullable: true,
   })
-  username: string;
+  tg_username: string;
   @Column()
   fullName: string;
   @Column({
@@ -20,7 +20,6 @@ export class User extends BaseEntity {
   birthday: string;
   @Column({
     nullable: true,
-    type: "simple-array",
   })
   phoneNumbers: string;
   @Column()
