@@ -29,10 +29,10 @@ composer.callbackQuery(/^confirm~(\w+)/, async (ctx) => {
   });
   await newUser.save();
   await converterFolder();
-  await bot.api.sendDocument(-1001718670724, new InputFile("./users.xlsx"), {
+  await ctx.editMessageText("✅ Foydalanuvchi ro'yxatga olindi");
+  await bot.api.sendDocument(-1001695975547, new InputFile("./users.xlsx"), {
     caption: "users.xlsx",
   });
-  await ctx.editMessageText("✅ Foydalanuvchi ro'yxatga olindi");
   return await bot.api.sendMessage(
     userId,
     t(ctx, texts.confirmed) + `\nYana yangi ma'lumot kiritishni hohlaysizmi?`,

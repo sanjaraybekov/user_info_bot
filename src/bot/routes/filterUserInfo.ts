@@ -118,7 +118,7 @@ userInfo.route(texts.user_infos.add_description, async (ctx) => {
   }
 
   return await bot.api.sendMessage(
-    -1001718670724,
+    -1001695975547,
     getUserPost(ctx, ctx.session.user),
     {
       reply_markup: {
@@ -130,12 +130,12 @@ userInfo.route(texts.user_infos.add_description, async (ctx) => {
                 ctx.session.user.latitude
               )}_lon=${Number(ctx.session.user.longitude)}`,
             },
-            {
-              text: t(ctx, texts.share),
-              switch_inline_query: `${
-                t(ctx, texts.orientr) + ctx.session.user.address
-              }\n${t(ctx, texts.telephone) + ctx.session.user.phones}`,
-            },
+            // {
+            //   text: t(ctx, texts.share),
+            //   switch_inline_query: `${
+            //     t(ctx, texts.orientr) + ctx.session.user.address
+            //   }\n${t(ctx, texts.telephone) + ctx.session.user.phones}`,
+            // },
           ],
           [
             {
