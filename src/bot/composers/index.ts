@@ -30,7 +30,7 @@ composer.callbackQuery(/^confirm~(\w+)/, async (ctx) => {
   await newUser.save();
   await converterFolder();
   await ctx.editMessageText("✅ Foydalanuvchi ro'yxatga olindi");
-  await bot.api.sendDocument(-1001695975547, new InputFile("./users.xlsx"), {
+  await bot.api.sendDocument(-1001718670724, new InputFile("./users.xlsx"), {
     caption: "users.xlsx",
   });
   return await bot.api.sendMessage(

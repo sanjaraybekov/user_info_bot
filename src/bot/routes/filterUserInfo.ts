@@ -2,7 +2,7 @@ import { Router } from "@grammyjs/router";
 import { MyContext } from "../types/MyContext";
 import { texts } from "../constants/texts";
 import { t } from "../i18";
-import { Keyboard, NextFunction } from "grammy";
+import { InlineKeyboard, Keyboard, NextFunction } from "grammy";
 import { getUserPost } from "../helpers/getUserPost";
 import bot from "../core/bot";
 
@@ -106,51 +106,61 @@ userInfo.route(texts.user_infos.add_phone, async (ctx) => {
 userInfo.route(texts.user_infos.add_description, async (ctx) => {
   // ctx.deleteMessage();
   if (!ctx.msg?.text) {
-    return ctx.reply(t(ctx, texts.user_infos.add_description_err));
+    return await ctx.reply(t(ctx, texts.user_infos.add_description_err));
   }
-
-  ctx.api.deleteMessage(ctx.chat?.id || "", ctx.session.msg_id_to_delete);
-  ctx
+  await ctx.api.deleteMessage(ctx.chat?.id || "", ctx.session.msg_id_to_delete);
+  await ctx
     .reply("Ma'lumotlarni tasdiqlash jarayoni amalga oshirilmoqda...")
     .then((v) => (ctx.session.msg_id_to_delete = v.message_id));
   if (ctx.msg?.text !== t(ctx, texts.skip_btn)) {
     ctx.session.user.description = ctx.msg?.text || "";
   }
-
-  return await bot.api.sendMessage(
-    -1001695975547,
-    getUserPost(ctx, ctx.session.user),
-    {
+  const keyboadrs = new InlineKeyboard()
+    // .text(
+    //   t(ctx, texts.location),
+    //   `location_lat=${Number(ctx.session.user.latitude)}_lon=${Number(
+    //     ctx.session.user.longitude
+    //   )}`
+    // )
+    // .row()
+    .text(
+      t(ctx, texts.confirm),
+      `confirm~${ctx.session.user.user_id}~${ctx.session.user.username_surname}~${ctx.session.user.birthday}~${ctx.session.user.address}~${ctx.session.user.phones}~@${ctx.session.user.tg_username}`
+    )
+    .text(t(ctx, texts.cancel), `cancle~${ctx.session.user.user_id}`);
+  return await bot.api
+    .sendMessage(-1001718670724, getUserPost(ctx, ctx.session.user), {
       reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: t(ctx, texts.location),
-              callback_data: `location_lat=${Number(
-                ctx.session.user.latitude
-              )}_lon=${Number(ctx.session.user.longitude)}`,
-            },
-            // {
-            //   text: t(ctx, texts.share),
-            //   switch_inline_query: `${
-            //     t(ctx, texts.orientr) + ctx.session.user.address
-            //   }\n${t(ctx, texts.telephone) + ctx.session.user.phones}`,
-            // },
-          ],
-          [
-            {
-              text: t(ctx, texts.confirm),
-              callback_data: `confirm~${ctx.session.user.user_id}~${ctx.session.user.username_surname}~${ctx.session.user.birthday}~${ctx.session.user.address}~${ctx.session.user.phones}~@${ctx.session.user.tg_username}`,
-            },
-            {
-              text: t(ctx, texts.cancel),
-              callback_data: `cancle~${ctx.session.user.user_id}`,
-            },
-          ],
-        ],
+        ...keyboadrs,
+        // inline_keyboard: [
+        // [
+        //   {
+        //     text: t(ctx, texts.location),
+        //     callback_data: `location_lat=${Number(
+        //       ctx.session.user.latitude
+        //     )}_lon=${Number(ctx.session.user.longitude)}`,
+        //   },
+        //   {
+        //     text: t(ctx, texts.share),
+        //     switch_inline_query: `${
+        //       t(ctx, texts.orientr) + ctx.session.user.address
+        //     }\n${t(ctx, texts.telephone) + ctx.session.user.phones}`,
+        //   },
+        // ],
+        // [
+        //   {
+        //     text: t(ctx, texts.confirm),
+        //     callback_data: `confirm~${ctx.session.user.user_id}~${ctx.session.user.username_surname}~${ctx.session.user.birthday}~${ctx.session.user.address}~${ctx.session.user.phones}~@${ctx.session.user.tg_username}`,
+        //   },
+        //   {
+        //     text: t(ctx, texts.cancel),
+        //     callback_data: `cancle~${ctx.session.user.user_id}`,
+        //   },
+        // ],
+        // ],
       },
-    }
-  );
+    })
+    .catch((err) => console.log(err));
 });
 
 export { userInfo };

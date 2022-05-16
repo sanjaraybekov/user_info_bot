@@ -6,7 +6,7 @@ const main = async () => {
   try {
     await createConnection({
       type: "postgres",
-      database: "user_info_db",
+      database: "user_info_two",
       username: "postgres",
       port: 5432,
       password: "123123",
